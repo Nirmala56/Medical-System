@@ -1,0 +1,61 @@
+import java.util.Scanner;
+import java.util.Date;
+import java.util.Random;
+
+public class Main {
+   public static final int MIN_AGE = 18;
+   public static final int MAX_AGE = 65;
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Enter your name: ");
+       String name = scanner.nextLine();
+       System.out.println("Enter your age: ");
+       int age = scanner.nextInt();
+
+       if (age < MIN_AGE || age > MAX_AGE) {
+           System.out.println("Sorry, you are not eligible for medical treatment.");
+       } else {
+           MedicalTreatment treatment = new MedicalTreatment(name);
+           treatment.startTreatment();
+           //so we need to add the class medical treatment and make it so it asks for pain level and based off of pain level it determines treatment plan
+       }
+   }
+}
+
+class MedicalTreatment {
+   private final String name;
+   private final Date date;
+   private final Random random;
+
+   public MedicalTreatment(String name) {
+       this.name = name;
+       this.date = new Date();
+       this.random = new Random();
+   }
+
+   public void startTreatment() {
+       System.out.println("Treatment started for " + name + " on " + date);
+       int severity = random.nextInt(10) + 1;
+
+       if (severity <= 3) {
+           givePainMedication();
+       } else if (severity <= 7) {
+           giveAntibiotics();
+       } else {
+           performSurgery();
+       }
+   }
+
+   private void givePainMedication() {
+       System.out.println("Prescribing pain medication to " + name);
+   }
+
+   private void giveAntibiotics() {
+       System.out.println("Prescribing antibiotics to " + name);
+   }
+
+   private void performSurgery() {
+       System.out.println("Scheduling surgery for " + name);
+   }
+}
